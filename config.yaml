@@ -1,0 +1,85 @@
+news_feeds:
+  - url: "https://feeds.reuters.com/reuters/topNews"
+    name: "Reuters Top News"
+  - url: "https://feeds.reuters.com/reuters/businessNews"
+    name: "Reuters Business"
+  - url: "https://feeds.reuters.com/reuters/technologyNews"
+    name: "Reuters Technology"
+  - url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+    name: "NYT Home Page"
+  - url: "https://feeds.bbci.co.uk/news/world/rss.xml"
+    name: "BBC World"
+  - url: "https://feeds.bbci.co.uk/news/business/rss.xml"
+    name: "BBC Business"
+  - url: "https://feeds.bbci.co.uk/news/technology/rss.xml"
+    name: "BBC Technology"
+  - url: "https://techcrunch.com/feed/"
+    name: "TechCrunch"
+  - url: "https://www.theguardian.com/world/rss"
+    name: "The Guardian World"
+  - url: "https://www.theguardian.com/business/rss"
+    name: "The Guardian Business"
+  - url: "https://feeds.skynews.com/feeds/rss/home.xml"
+    name: "Sky News"
+  - url: "https://www.espn.com/espn/rss/news"
+    name: "ESPN Sports"
+
+google_trends:
+  geo: "US"           # country code for trends
+  timeframe: "now 1-d"
+  categories: [0]     # 0 = all categories
+
+events:
+  lookahead_days: 30  # how many days ahead to look for events
+  ticketmaster_enabled: false  # set to true if TICKETMASTER_API_KEY is set
+
+economic:
+  fred_enabled: false  # set to true if FRED_API_KEY is set
+  series:
+    - id: "CPIAUCSL"
+      name: "Consumer Price Index"
+    - id: "UNRATE"
+      name: "Unemployment Rate"
+    - id: "FEDFUNDS"
+      name: "Federal Funds Rate"
+
+verticals:
+  - automotive
+  - finance
+  - retail
+  - travel
+  - technology
+  - health
+  - entertainment
+  - sports
+  - food
+  - fashion
+  - real_estate
+  - education
+
+intelligence:
+  model: "claude-opus-4-7"
+  max_tokens: 8000
+  max_segments: 30          # max segments to propose per run
+  min_score: 40             # minimum score to include in output
+
+output:
+  dir: "segments"
+  formats:
+    - json
+    - csv
+    - markdown
+  git_commit: true          # auto-commit output to repo
+
+notifications:
+  slack_enabled: false      # set to true if SLACK_WEBHOOK_URL is set
+  email_enabled: false      # set to true if SMTP settings are configured
+  top_n: 10                 # how many top segments to include in notification
+
+dedup:
+  lookback_days: 30         # compare against last N days of proposals
+  similarity_threshold: 0.8 # cosine/name similarity threshold (0-1)
+
+cost:
+  daily_limit_usd: 5.00     # hard limit on Claude API spend per day
+  warn_at_usd: 3.00         # warn when approaching limit
