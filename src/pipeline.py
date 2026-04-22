@@ -16,7 +16,7 @@ from .sources.economic import fetch_economic
 from .sources.events import fetch_events
 from .sources.google_trends import fetch_trends
 from .sources.news_feeds import Signal, fetch_news
-from .sources.wikipedia import fetch_wikipedia
+from .sources.wikipedia import fetch_wikipedia_events
 from .utils.cost_guard import CostGuard
 from .utils.dedup import filter_duplicates
 
@@ -49,7 +49,7 @@ def _gather_signals(config: dict) -> list[Signal]:
     )
 
     print("[pipeline] Fetching Wikipedia current events …")
-    signals += fetch_wikipedia()
+    signals += fetch_wikipedia_events()
 
     econ_cfg = config.get("economic", {})
     print("[pipeline] Fetching economic indicators …")
