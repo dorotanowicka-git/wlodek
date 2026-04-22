@@ -50,7 +50,7 @@ def _gather_signals(config: dict) -> list[Signal]:
 
     econ_cfg = config.get("economic", {})
     print("[pipeline] Fetching economic indicators …")
-    signals += fetch_economic(fred_enabled=econ_cfg.get("fred_enabled", False))
+    signals += fetch_economic(econ_cfg)
 
     print(f"[pipeline] Total signals collected: {len(signals)}")
     return signals
