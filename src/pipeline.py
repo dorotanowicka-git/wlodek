@@ -43,10 +43,7 @@ def _gather_signals(config: dict) -> list[Signal]:
 
     events_cfg = config.get("events", {})
     print("[pipeline] Fetching upcoming events …")
-    signals += fetch_events(
-        lookahead_days=events_cfg.get("lookahead_days", 30),
-        ticketmaster_enabled=events_cfg.get("ticketmaster_enabled", False),
-    )
+    signals += fetch_events(events_cfg)
 
     print("[pipeline] Fetching Wikipedia current events …")
     signals += fetch_wikipedia_events()
