@@ -186,7 +186,13 @@ def run_analysis(
 
     cost_guard.check()
 
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "ANTHROPIC_API_KEY is not set. Create a .env file in the repo root:\n"
+            "  echo 'ANTHROPIC_API_KEY=sk-ant-...' > .env"
+        )
+    client = anthropic.Anthropic(api_key=api_key)
 
     user_prompt = _build_user_prompt(signals, verticals, max_segments, run_date)
 
